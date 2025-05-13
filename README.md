@@ -3,6 +3,28 @@
 
 Authors: F. Author, S. Author, ...
 
+### Run the Analysis
+
+The analysis is run within a dedicated analysis container to ensure reproducability.
+You should build the container image specifically for your analysis.
+Below, we assume that you replace ``ANALYSIS`` with a unique identifier,
+e.g. ``2025-01`` or similar.
+
+1. Adjust the file describing the container image, e.g., adjust the EOS version that you require.
+
+2. Build a container image specific to the analysis using ``podman``.
+
+```bash
+podman build -f image/Dockerfile -t eos:ANALYSIS ./
+```
+
+3. You can now run ``eos-analysis`` within the container using ``podman``, e.g., using
+```bash
+podman run eos:ANALYSIS \
+    --volume $(pwd):/analysis/ \
+    eos-analysis run -f analysis.yaml
+```
+
 ### Contents
 
 #### Ancillary Files
